@@ -4,12 +4,22 @@ import { useCallback } from "react";
 const url = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
 const AppContext = React.createContext();
 
+const getLocalStorage = () => {
+  let list = localStorage.getItem("Cocktial");
+  if (list) {
+    return (list = JSON.parse(localStorage.getItem("Cocktial")));
+  } else {
+    return [];
+  }
+};
+
 const AppProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState("a");
   const [cocktails, setCocktail] = useState([]);
+  const [prevSearch, setPrevSearch] = useState(getLocalStorage());
 
-  const fetchDrinks =useCallback( async () => {
+  const fetchDrinks = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`${url}${searchTerm}`);
@@ -29,7 +39,7 @@ const AppProvider = ({ children }) => {
           };
         });
 
-        setCocktail(newCocktails)
+        setCocktail(newCocktails);
       } else {
         setCocktail([]);
       }
@@ -38,7 +48,7 @@ const AppProvider = ({ children }) => {
       console.log(error);
       setLoading(false);
     }
-  },[searchTerm]);
+  }, [searchTerm]);
 
   useEffect(() => {
     fetchDrinks();
@@ -49,6 +59,9 @@ const AppProvider = ({ children }) => {
         loading,
         cocktails,
         setSearchTerm,
+        setPrevSearch,
+        prevSearch,
+        searchTerm,
       }}
     >
       {children}

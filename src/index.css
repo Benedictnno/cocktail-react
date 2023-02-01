@@ -409,3 +409,14 @@ Cocktail
     height: 5em;
   }
 }
+
+.place{
+  cursor: pointer;
+  font-weight: 500;
+  transition: linear 0.2s;
+  border-radius: 2px;
+}
+.place:hover{
+  background-color: rgb(170, 163, 163);
+  padding-left: 1em;
+}

@@ -15,7 +15,6 @@ const SingleCocktail = () => {
         const res = await fetch(`${url}${id}`);
         const data = await res.json();
         const { drinks } = data;
-        console.log(drinks[0]);
         if (drinks) {
           const {
             strDrink: name,
@@ -38,8 +37,6 @@ const SingleCocktail = () => {
             strIngredient4,
             strIngredient5,
           };
-
-          console.log(ingredient);
 
           const newCocktail = {
             name,
@@ -108,8 +105,9 @@ const SingleCocktail = () => {
           </p>
           <p>
             <span className="drink-data">ingredient :</span>
-            {ingredient.strIngredient1},  {ingredient.strIngredient2}, {ingredient.strIngredient3},{ingredient.strIngredient4}
-, {ingredient.strIngredient5}
+            {ingredient.strIngredient1}, {ingredient.strIngredient2},{" "}
+            {ingredient.strIngredient3},{ingredient.strIngredient4},{" "}
+            {ingredient.strIngredient5}
           </p>
         </div>
       </div>
